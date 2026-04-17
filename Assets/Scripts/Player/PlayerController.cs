@@ -15,8 +15,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        // rb.AddForce(new Vector2(""))
-        Debug.Log("the fuck");
+        Vector2 direction = ctx.ReadValue<Vector2>();
+        // direction.Normalize();
+
+        rb.linearVelocity = direction * moveSpeed;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
