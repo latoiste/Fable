@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300144, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
-  m_Color: {r: 0, g: 0.94729495, b: 1, a: 0}
+  m_Color: {r: 0, g: 0.94729495, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,7 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1219773920056954022}
   - component: {fileID: 1896277348916528277}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300148, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
-  m_Color: {r: 0, g: 0.94729495, b: 1, a: 0}
+  m_Color: {r: 0, g: 0.94729495, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -282,7 +282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405238440319316156}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: Rune
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +390,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300150, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
-  m_Color: {r: 0, g: 0.94729495, b: 1, a: 0}
+  m_Color: {r: 0, g: 0.94729495, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -481,7 +481,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300146, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
-  m_Color: {r: 0, g: 0.94729495, b: 1, a: 0}
+  m_Color: {r: 0, g: 0.94729495, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -501,7 +501,8 @@ GameObject:
   - component: {fileID: 5004333941170373568}
   - component: {fileID: 218901727664933180}
   - component: {fileID: 8370381469841323743}
-  m_Layer: 20
+  - component: {fileID: 838479172680027450}
+  m_Layer: 0
   m_Name: PF Props - Altar 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,8 +571,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1869315837
-  m_SortingLayer: 0
+  m_SortingLayerID: -1903961639
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300142, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
@@ -630,3 +631,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.84837615, y: 0.65423536}
   m_EdgeRadius: 0
+--- !u!114 &838479172680027450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8731875978545515679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0f502ac6a9ff39d8b0f1a59c36d87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Altar
+  runes:
+  - {fileID: 4166681227843352749}
+  - {fileID: 4185232612954608811}
+  - {fileID: 3667662168031477350}
+  - {fileID: 2508359818950725948}
