@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 1750559442244292781}
   - component: {fileID: 4950410758940510882}
   - component: {fileID: 1946991013028858359}
+  - component: {fileID: 4313787571062507483}
   m_Layer: 21
   m_Name: PF Props - Stone 05
   m_TagString: Untagged
@@ -170,9 +171,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1824243579
+  m_SortingLayerID: -1903961639
   m_SortingLayer: 3
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300110, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -230,3 +231,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.55818987, y: 0.23068511}
   m_EdgeRadius: 0
+--- !u!114 &4313787571062507483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5307379572759763087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ec78babff4db6d8835e0a98b447952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YSort
+  baseOrder: 5000

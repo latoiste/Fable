@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7940839243301841754}
   - component: {fileID: 604993662784015292}
   - component: {fileID: 2009410209059493357}
+  - component: {fileID: -2851353077708043010}
   m_Layer: 20
   m_Name: PF Props - Pot 03
   m_TagString: Untagged
@@ -80,9 +81,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1824243579
+  m_SortingLayerID: -1903961639
   m_SortingLayer: 3
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300094, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -174,6 +175,19 @@ PolygonCollider2D:
       - {x: 0.107274055, y: 0.031965256}
       - {x: 0.20574903, y: 0.11417794}
   m_UseDelaunayMesh: 1
+--- !u!114 &-2851353077708043010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2457993463792141151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ec78babff4db6d8835e0a98b447952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YSort
+  baseOrder: 5000
 --- !u!1 &8483419322667076237
 GameObject:
   m_ObjectHideFlags: 0

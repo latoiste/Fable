@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8987614886975079838}
   - component: {fileID: 9106874039409043205}
   - component: {fileID: 7694014207293119643}
+  - component: {fileID: 3434063034097211676}
   m_Layer: 20
   m_Name: PF Props - Well 01
   m_TagString: Untagged
@@ -79,9 +80,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1824243579
+  m_SortingLayerID: -1903961639
   m_SortingLayer: 3
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300164, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -151,6 +152,19 @@ PolygonCollider2D:
       - {x: 0.75307256, y: 0.62807226}
       - {x: 0.5394118, y: 0.92652637}
   m_UseDelaunayMesh: 1
+--- !u!114 &3434063034097211676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4465873234160889830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ec78babff4db6d8835e0a98b447952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YSort
+  baseOrder: 5000
 --- !u!1 &4927725133662193568
 GameObject:
   m_ObjectHideFlags: 0
