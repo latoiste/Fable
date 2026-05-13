@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +11,8 @@ public class GameManager : MonoBehaviour
 
     private string nextIslandName;
     private AsyncOperation preloadOp;
-    public bool IsPreloading => preloadOp != null && (preloadOp.progress < 0.9f);
+    private bool isPreloaded;
+    private bool preloadLock = true;
 
     public static GameManager instance;
 
@@ -36,7 +35,7 @@ public class GameManager : MonoBehaviour
     {
         await SceneTransition.instance.FadeInAsync();
 
-        // await LoadNewIsland();
+        await LoadNewIsland();
         
         await SceneTransition.instance.FadeOutAsync();
     }
@@ -49,41 +48,55 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator PreloadIsland()
     {
-        preloadOp.allowSceneActivation = false;
+        if (isPreloaded) yield return null;
+
+        isPreloaded = true;
+        preloadLock = true;
+
         preloadOp = SceneManager.LoadSceneAsync(nextIslandName, LoadSceneMode.Additive);
+        preloadOp.allowSceneActivation = false;
 
         while (preloadOp.progress < 0.9f) yield return null;
+
+        preloadLock = false;
     }
 
-    // private async Task LoadNewIsland()
-    // {
-    //     while (!IsPreloading) await Task.Yield();
+    private async Task LoadNewIsland()
+    {
+        if (isPreloaded)
+        {
+            while (preloadLock) await Task.Yield();
+        } else
+        {
+            preloadOp = SceneManager.LoadSceneAsync(nextIslandName, LoadSceneMode.Additive);
+        }
 
-    //     preloadOp.allowSceneActivation = true;
-    //     while (!preloadOp.isDone) await Task.Yield();
+        preloadOp.allowSceneActivation = true;
+        while (!preloadOp.isDone) await Task.Yield();
 
-    //     Scene? oldIsland = GetCurrentIslandScene();
-    //     if (oldIsland != null)
-    //     {
-    //         AsyncOperation unloadOp = SceneManager.UnloadSceneAsync((Scene)oldIsland); // tak tau pake oldIsland! gbs 
-    //         while (!unloadOp.isDone) await Task.Yield();
-    //     }
+        Scene? oldIsland = GetCurrentIslandScene();
+        if (oldIsland != null)
+        {
+            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync((Scene)oldIsland); // tak tau pake oldIsland! gbs 
+            while (!unloadOp.isDone) await Task.Yield();
+        }
 
-    //     preloadOp = null;
-    // }
+        preloadOp = null;
+        isPreloaded = false;
+    }
 
-    // private Scene? GetCurrentIslandScene()
-    // {
-    //     int count = SceneManager.sceneCount;
-    //     for (int i = 0; i < count; i++)
-    //     {
-    //         Scene scene = SceneManager.GetSceneAt(i);
-    //         if (scene.name.StartsWith("Island"))
-    //         {
-    //             return scene;
-    //         }
-    //     }
-    //     return null;
-    // }
+    private Scene? GetCurrentIslandScene()
+    {
+        int count = SceneManager.sceneCount;
+        for (int i = 0; i < count; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+            if (scene.name.StartsWith("Island"))
+            {
+                return scene;
+            }
+        }
+        return null;
+    }
 
 }
