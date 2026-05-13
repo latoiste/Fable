@@ -6516,6 +6516,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF Props - Rune Pillar X2
       objectReference: {fileID: 0}
+    - target: {fileID: 6862118107529631925, guid: aa8b6e6955a26f65d89e9638f3a4cdff, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6862118107529631925, guid: aa8b6e6955a26f65d89e9638f3a4cdff, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7529626646000097760, guid: aa8b6e6955a26f65d89e9638f3a4cdff, type: 3}
       propertyPath: baseOrder
       value: 5000
