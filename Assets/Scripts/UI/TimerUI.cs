@@ -5,11 +5,8 @@ using UnityEngine.UI;
 
 public class TimerUI : MonoBehaviour
 {
-    [SerializeField]
-    private Timer timer;
-
-    [SerializeField]
-    private Slider slider;
+    [SerializeField] private Timer timer;
+    [SerializeField] private Slider slider;
 
     void Start()
     {
@@ -20,4 +17,9 @@ public class TimerUI : MonoBehaviour
     }
 
     private void UpdateSliderValue(float value) => slider.value = value;
+
+    void OnDestroy()
+    {
+        timer.onTimerUpdate -= UpdateSliderValue;
+    }
 }
