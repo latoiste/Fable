@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +11,7 @@ public class Island : MonoBehaviour
     private int totalCoins;
     private int coinsRequired;
     private int coinsGathered = 0;
+    private List<ICoinProvider> coinProviderRefs = new();
 
     public UnityEvent OnEnoughCoins;
     public bool wasCalled = false;
@@ -27,6 +29,7 @@ public class Island : MonoBehaviour
             {
                 provider.OnActivated += AddCoinsGathered;
                 totalCoins += provider.GetCoinAmount();
+                coinProviderRefs.Add(provider);
             } else
             {
                 Debug.LogWarning($"{child.name} in {this} is not a CoinProvider");
@@ -55,14 +58,9 @@ public class Island : MonoBehaviour
 
     void OnDestroy()
     {
-        foreach (Transform child in coinProviders)
+        foreach (ICoinProvider provider in coinProviderRefs)
         {
-            bool isCoinProvider = child.TryGetComponent<ICoinProvider>(out ICoinProvider provider);
-
-            if (isCoinProvider)
-            {
-                provider.OnActivated -= AddCoinsGathered;
-            }
+            if (provider != null) provider.OnActivated -= AddCoinsGathered;
         }
 
         OnEnoughCoins.RemoveListener(GameManager.instance.StartPreloadIsland);

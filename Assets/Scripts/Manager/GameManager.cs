@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerController player;
+    [SerializeField] private PlayerController player;
+    [SerializeField] private int islandCount = 2;
 
-    private string nextIslandName;
+    private string nextIsland;
     private AsyncOperation preloadOp;
     private bool isPreloaded;
     private bool preloadLock = true;
@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        nextIsland = NextIslandName();
     }
 
     // emitted from altar?
@@ -53,7 +55,15 @@ public class GameManager : MonoBehaviour
         isPreloaded = true;
         preloadLock = true;
 
-        preloadOp = SceneManager.LoadSceneAsync(nextIslandName, LoadSceneMode.Additive);
+        if (string.IsNullOrEmpty(nextIsland))
+        {
+            Debug.LogWarning("nextIsland is not set, cannot preload next island scene");
+            preloadLock = false;
+            isPreloaded = false;
+            yield return null;
+        }
+
+        preloadOp = SceneManager.LoadSceneAsync(nextIsland, LoadSceneMode.Additive);
         preloadOp.allowSceneActivation = false;
 
         while (preloadOp.progress < 0.9f) yield return null;
@@ -68,14 +78,18 @@ public class GameManager : MonoBehaviour
             while (preloadLock) await Task.Yield();
         } else
         {
-            preloadOp = SceneManager.LoadSceneAsync(nextIslandName, LoadSceneMode.Additive);
+            if (string.IsNullOrEmpty(nextIsland)) {
+                Debug.LogWarning("nextIsland is not set, cannot preload next island scene");
+                return;
+            }
+            preloadOp = SceneManager.LoadSceneAsync(nextIsland, LoadSceneMode.Additive);
         }
 
         preloadOp.allowSceneActivation = true;
         while (!preloadOp.isDone) await Task.Yield();
 
-        Scene? oldIsland = GetCurrentIslandScene();
-        if (oldIsland != null)
+        Scene oldIsland = GetCurrentIslandScene();
+        if (oldIsland.IsValid())
         {
             AsyncOperation unloadOp = SceneManager.UnloadSceneAsync((Scene)oldIsland); // tak tau pake oldIsland! gbs 
             while (!unloadOp.isDone) await Task.Yield();
@@ -85,7 +99,7 @@ public class GameManager : MonoBehaviour
         isPreloaded = false;
     }
 
-    private Scene? GetCurrentIslandScene()
+    private Scene GetCurrentIslandScene()
     {
         int count = SceneManager.sceneCount;
         for (int i = 0; i < count; i++)
@@ -96,7 +110,23 @@ public class GameManager : MonoBehaviour
                 return scene;
             }
         }
-        return null;
+        return default;
     }
 
+    private string NextIslandName()
+    {
+        System.Random random = new();
+        int nextIslandIndex = random.Next(0, islandCount);
+
+        Scene currentIsland = GetCurrentIslandScene();
+        if (!currentIsland.IsValid()) return $"Island_{nextIslandIndex}";
+
+        string currentIslandIndex = currentIsland.name.Split('_')[1];
+        if (string.Equals(currentIslandIndex, nextIslandIndex.ToString()))
+        {
+            nextIslandIndex = (nextIslandIndex + 1) % islandCount;
+        }
+
+        return $"Island_{nextIslandIndex}";
+    }
 }
