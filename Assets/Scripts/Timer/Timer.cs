@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField, Range(0,120)]
-    private float durationSeconds;
+    [SerializeField, Range(0,120)] private float durationSeconds;
     private float current;
     private float percentage => current/durationSeconds;
     private bool timerEnd = false;
@@ -26,4 +25,6 @@ public class Timer : MonoBehaviour
         if (current <= 0) timerEnd = true;
     }
 
+    public void Pause() => Time.timeScale = 0f;
+    public void Resume() => Time.timeScale = 1f;
 }

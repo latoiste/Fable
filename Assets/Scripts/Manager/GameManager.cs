@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
         Scene oldIsland = GetCurrentIslandScene();
         if (oldIsland.IsValid())
         {
-            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync((Scene)oldIsland); // tak tau pake oldIsland! gbs 
+            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(oldIsland); 
             while (!unloadOp.isDone) await Task.Yield();
         }
 
