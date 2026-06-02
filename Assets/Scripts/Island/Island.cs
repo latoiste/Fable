@@ -8,10 +8,12 @@ public class Island : MonoBehaviour
     [SerializeField] private Altar altar;
     [SerializeField] private Transform coinProviders;
 
-    private int totalCoins;
+    public int TotalCoins { get; private set; }
     private int coinsRequired;
     private int coinsGathered = 0;
     private List<ICoinProvider> coinProviderRefs = new();
+
+    public Action<int> OnGatheredCoins;
 
     public UnityEvent OnEnoughCoins;
     public bool wasCalled = false;
@@ -28,7 +30,7 @@ public class Island : MonoBehaviour
             if (isCoinProvider)
             {
                 provider.OnActivated += AddCoinsGathered;
-                totalCoins += provider.GetCoinAmount();
+                TotalCoins += provider.CoinAmount();
                 coinProviderRefs.Add(provider);
             } else
             {
@@ -36,8 +38,9 @@ public class Island : MonoBehaviour
             }
         }
 
-        coinsRequired = (int)(totalCoins * 0.5);
+        coinsRequired = (int)(TotalCoins * 0.5);
 
+        UIManager.instance.AddIslandListener(this);
         OnEnoughCoins.AddListener(GameManager.instance.StartPreloadIsland);
     }
 
@@ -46,6 +49,7 @@ public class Island : MonoBehaviour
     public void AddCoinsGathered(int amount)
     {
         coinsGathered += amount;
+        OnGatheredCoins.Invoke(coinsGathered * 10);
 
         if (coinsGathered >= coinsRequired)
         {

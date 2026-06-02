@@ -31,7 +31,7 @@ public class Chest : MonoBehaviour, ICoinProvider
         }
     }
 
-    public int GetCoinAmount() => coinAmount;
+    public int CoinAmount() => coinAmount;
 
     private void OpenChest()
     {

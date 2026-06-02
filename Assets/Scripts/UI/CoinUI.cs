@@ -40,7 +40,7 @@ public class CoinUI : MonoBehaviour
         coinCountCoroutine = StartCoroutine(UpdateCoins(targetCoins));
     }
 
-    public IEnumerator UpdateCoins(int targetCoins)
+    private IEnumerator UpdateCoins(int targetCoins)
     {
         while (displayedCoins != targetCoins)
         {
