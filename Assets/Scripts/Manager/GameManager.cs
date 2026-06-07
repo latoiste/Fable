@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,17 +8,20 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerController player;
-    [SerializeField] private int islandCount = 2;
+    private int islandCount = 3;
 
     private string nextIsland;
     private AsyncOperation preloadOp;
     private bool isPreloaded;
     private bool preloadLock = true;
+    private bool isSwitching = false;
+    private System.Random random;
 
     public static GameManager instance;
 
     void Awake()
     {
+        random = new System.Random();
         if (player == null) throw new Exception($"Attribute player in {this} cannot be null");
 
         if (instance == null)
@@ -28,18 +32,25 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        nextIsland = NextIslandName();
     }
 
-    // emitted from altar?
+    // called from altar event
     public async Task SwitchIslands()
     {
+        if (isSwitching) return;
+
+        isSwitching = true;
+        player.Freeze();
         await SceneTransition.instance.FadeInAsync();
 
         await LoadNewIsland();
-        
+
+        Island newIsland = GetIslandObject();
+        player.SetSpawnPoint(newIsland.SpawnPoint);
+    
+        player.Unfreeze();
         await SceneTransition.instance.FadeOutAsync();
+        isSwitching = false;
     }
 
     // Event when player gathers enough coins
@@ -52,8 +63,10 @@ public class GameManager : MonoBehaviour
     {
         if (isPreloaded) yield return null;
 
+        Debug.Log("Preloading");
         isPreloaded = true;
         preloadLock = true;
+        nextIsland = NextIslandName();
 
         if (string.IsNullOrEmpty(nextIsland))
         {
@@ -78,6 +91,7 @@ public class GameManager : MonoBehaviour
             while (preloadLock) await Task.Yield();
         } else
         {
+            nextIsland = NextIslandName();
             if (string.IsNullOrEmpty(nextIsland)) {
                 Debug.LogWarning("nextIsland is not set, cannot preload next island scene");
                 return;
@@ -113,10 +127,25 @@ public class GameManager : MonoBehaviour
         return default;
     }
 
+    private Island GetIslandObject()
+    {
+        Scene scene = GetCurrentIslandScene();
+        if (!scene.IsValid()) throw new Exception("No island scene found");
+
+        GameObject islandObject = scene
+            .GetRootGameObjects()
+            .FirstOrDefault(obj => obj.CompareTag("Island"));
+
+        bool found = islandObject.TryGetComponent<Island>(out Island island);
+        if (!found) throw new Exception($"Island object missing in {scene.path}");
+
+        return island;
+    }
+
     private string NextIslandName()
     {
-        System.Random random = new();
         int nextIslandIndex = random.Next(0, islandCount);
+        // Debug.Log(nextIslandIndex);
 
         Scene currentIsland = GetCurrentIslandScene();
         if (!currentIsland.IsValid()) return $"Island_{nextIslandIndex}";

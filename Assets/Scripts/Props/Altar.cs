@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Altar : MonoBehaviour
 {
     [SerializeField]
     private List<SpriteRenderer> runes;
     private float targetAlpha = 0;
+
+    private bool canActivate = false;
+    public UnityEvent OnAltarActivated;
 
     void Awake()
     {
@@ -26,10 +30,19 @@ public class Altar : MonoBehaviour
     void Update()
     {
         float currentAlpha = runes[0].color.a;
-        float newAlpha= Mathf.Lerp(currentAlpha, targetAlpha, 2 * Time.deltaTime);
+        float newAlpha = Mathf.Lerp(currentAlpha, targetAlpha, 2 * Time.deltaTime);
 
         Color newColor = runes[0].color;
         newColor.a = newAlpha;
+
+        if (newAlpha >= 0.9f && canActivate)
+        {
+            OnAltarActivated.Invoke();
+            canActivate = false;
+        } else if (newAlpha < 1f)
+        {
+            canActivate = true;
+        }
 
         foreach (SpriteRenderer r in runes)
         {
