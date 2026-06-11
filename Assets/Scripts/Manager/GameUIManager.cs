@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
 
     public void AddIslandListener(Island island)
     {
-        InitCoinUI(island.TotalCoins);
+        InitCoinUI(island.CoinsRequired);
         island.OnGatheredCoins += UpdateCoinUI;
     }
 

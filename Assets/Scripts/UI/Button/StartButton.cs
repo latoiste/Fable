@@ -29,7 +29,6 @@ public class StartButton : MonoBehaviour
         await SceneTransition.instance.FadeInAsync();
         await SceneManager.LoadSceneAsync("Gameplay");
         // await Task.Delay(1000);
-        await SceneTransition.instance.FadeOutAsync();
     }
 
     void OnDestroy()

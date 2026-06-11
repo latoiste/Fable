@@ -9,8 +9,8 @@ public class Island : MonoBehaviour
     [SerializeField] private Altar altar;
     [SerializeField] private Transform coinProviders;
 
-    public int TotalCoins { get; private set; }
-    private int coinsRequired;
+    private int totalCoins;
+    public int CoinsRequired { get; private set; }
     private int coinsGathered = 0;
     private List<ICoinProvider> coinProviderRefs = new();
 
@@ -43,7 +43,7 @@ public class Island : MonoBehaviour
             if (isCoinProvider)
             {
                 provider.OnActivated += AddCoinsGathered;
-                TotalCoins += provider.CoinAmount();
+                totalCoins += provider.CoinAmount();
                 coinProviderRefs.Add(provider);
             } else
             {
@@ -51,7 +51,7 @@ public class Island : MonoBehaviour
             }
         }
 
-        coinsRequired = (int)(TotalCoins * 0.5) + 1;
+        CoinsRequired = (int)(totalCoins * 0.5) + 1;
 
         UIManager.instance.AddIslandListener(this);
         OnEnoughCoins.AddListener(GameManager.instance.StartPreloadIsland);
@@ -63,7 +63,7 @@ public class Island : MonoBehaviour
         coinsGathered += amount;
         OnGatheredCoins.Invoke(coinsGathered);
 
-        if (coinsGathered >= coinsRequired)
+        if (coinsGathered >= CoinsRequired)
         {
             if (!onEnoughCoinsCalled) {
                 // Debug.Log("OnEnoughCoins invoked");
@@ -77,7 +77,7 @@ public class Island : MonoBehaviour
     {
         // Debug.Log("TrySwitchIslands called");
         // Debug.Log($"ActivateAltarCalled: {onActivateAltarCalled}");
-        if (coinsGathered >= coinsRequired)
+        if (coinsGathered >= CoinsRequired)
         {
             if (!onActivateAltarCalled) {
                 onActivateAltarCalled = true;

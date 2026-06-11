@@ -34,6 +34,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    async void Start()
+    {
+        await SceneTransition.instance.FadeInAsync();
+
+        player.Freeze();
+
+        await LoadNewIsland();
+        
+        Island newIsland = GetIslandObject();
+        player.SetSpawnPoint(newIsland.SpawnPoint);
+
+        player.Unfreeze();
+        
+        // play timer
+        await SceneTransition.instance.FadeOutAsync();
+    }
+
     // called from altar event
     public async Task SwitchIslands()
     {
@@ -43,7 +60,15 @@ public class GameManager : MonoBehaviour
         player.Freeze();
         await SceneTransition.instance.FadeInAsync();
 
+        Scene oldIsland = GetCurrentIslandScene();
+
         await LoadNewIsland();
+
+        if (oldIsland.IsValid())
+        {
+            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(oldIsland); 
+            while (!unloadOp.isDone) await Task.Yield();
+        }
 
         Island newIsland = GetIslandObject();
         player.SetSpawnPoint(newIsland.SpawnPoint);
@@ -101,13 +126,6 @@ public class GameManager : MonoBehaviour
 
         preloadOp.allowSceneActivation = true;
         while (!preloadOp.isDone) await Task.Yield();
-
-        Scene oldIsland = GetCurrentIslandScene();
-        if (oldIsland.IsValid())
-        {
-            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(oldIsland); 
-            while (!unloadOp.isDone) await Task.Yield();
-        }
 
         preloadOp = null;
         isPreloaded = false;
