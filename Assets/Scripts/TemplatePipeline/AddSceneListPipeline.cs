@@ -1,12 +1,13 @@
+#if UNITY_EDITOR
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.Build.Profile;
+using UnityEngine;
+
 using UnityEditor.SceneManagement;
 using UnityEditor.SceneTemplate;
-using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+
 
 public class AddSceneListPipeline : ISceneTemplatePipeline
 {
@@ -43,3 +44,4 @@ public class AddSceneListPipeline : ISceneTemplatePipeline
         EditorBuildSettings.scenes = scenes.ToArray();
     }
 }
+#endif
