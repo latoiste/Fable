@@ -145,10 +145,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 90462091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2898eee897c2ae47ab2ddb05a2774cd, type: 3}
+  m_Script: {fileID: 11500000, guid: e9d866f7ee7ff2b45a1aaa3c1f0ccc36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  coinUI: {fileID: 2103985775}
+  coinUI: {fileID: 1338170096}
 --- !u!4 &90462093
 Transform:
   m_ObjectHideFlags: 0
@@ -296,7 +296,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.975121, y: 0.5002489, z: -7}
+  m_LocalPosition: {x: -20.765137, y: 11.130249, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -564,7 +564,7 @@ Transform:
   m_GameObject: {fileID: 1001808598}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.975121, y: 0.5002489, z: -7}
+  m_LocalPosition: {x: -20.765137, y: 11.130249, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -724,6 +724,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddb75795ee293585db441c0362cdb6e8, type: 3}
+--- !u!114 &1338170096 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8234324759220687446, guid: ddb75795ee293585db441c0362cdb6e8, type: 3}
+  m_PrefabInstance: {fileID: 1338170095}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da49c3ec15678a34a7cfddbd33ed8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinUI
 --- !u!1 &1965289998
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,17 +830,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ad9e810d593a6a7b314e0c02ec6298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
---- !u!114 &2103985775 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8234324759220687446, guid: ddb75795ee293585db441c0362cdb6e8, type: 3}
-  m_PrefabInstance: {fileID: 1338170095}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3da49c3ec15678a34a7cfddbd33ed8cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoinUI
 --- !u!1001 &2117946590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -939,17 +939,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 617350248766206107, guid: b7e9a79b1917a7d298a87bdcd2717f3e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 979641212821638477, guid: b7e9a79b1917a7d298a87bdcd2717f3e, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2733631802877295935, guid: b7e9a79b1917a7d298a87bdcd2717f3e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: -20.79
       objectReference: {fileID: 0}
     - target: {fileID: 2733631802877295935, guid: b7e9a79b1917a7d298a87bdcd2717f3e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.75
+      value: 9.88
       objectReference: {fileID: 0}
     - target: {fileID: 2733631802877295935, guid: b7e9a79b1917a7d298a87bdcd2717f3e, type: 3}
       propertyPath: m_LocalPosition.z

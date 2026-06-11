@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 519440755053725700}
   - component: {fileID: 5178216598950221530}
   - component: {fileID: 1911871560319002864}
+  - component: {fileID: 5407422588242418709}
   m_Layer: 20
   m_Name: PF Plant - Bush 06
   m_TagString: Untagged
@@ -139,6 +140,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.45743656, y: 0.20798206}
   m_EdgeRadius: 0
+--- !u!114 &5407422588242418709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445832985053953744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ec78babff4db6d8835e0a98b447952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YSort
+  baseOrder: 5000
 --- !u!1 &6505079814597058932
 GameObject:
   m_ObjectHideFlags: 0

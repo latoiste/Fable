@@ -101,6 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7666990633396266577}
   - component: {fileID: 2241111671116838665}
+  - component: {fileID: 1629182796256052307}
   m_Layer: 20
   m_Name: PF Plant - Bush 02
   m_TagString: Untagged
@@ -183,3 +184,16 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 1
+--- !u!114 &1629182796256052307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5218289492952281704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ec78babff4db6d8835e0a98b447952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YSort
+  baseOrder: 5000

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6357068862244725918}
   - component: {fileID: 382455314372580645}
+  - component: {fileID: 2306293588231995465}
   m_Layer: 20
   m_Name: PF Plant - Tree 01
   m_TagString: Untagged
@@ -81,6 +82,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.26862642, y: 0.1860609}
   m_EdgeRadius: 0
+--- !u!114 &2306293588231995465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260112734361509750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ec78babff4db6d8835e0a98b447952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YSort
+  baseOrder: 5000
 --- !u!1 &2145655620639051417
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,8 +172,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -44025399
-  m_SortingLayer: 0
+  m_SortingLayerID: -1903961639
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300124, guid: c3a40e1c46727b94e959990527f8e7fa, type: 3}
@@ -249,8 +263,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1869315837
-  m_SortingLayer: 0
+  m_SortingLayerID: -1903961639
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300122, guid: c3a40e1c46727b94e959990527f8e7fa, type: 3}
@@ -340,9 +354,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1869315837
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: -659152483
+  m_SortingLayer: 1
+  m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300080, guid: 8501e10b1eafde34586080ba342fdc0e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

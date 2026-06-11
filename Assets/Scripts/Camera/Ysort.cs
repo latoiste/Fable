@@ -1,19 +1,30 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class YSort : MonoBehaviour
 {
-    [SerializeField, Range(1000, 5000)] private int baseOrder = 5000;
-    private SpriteRenderer spriteRenderer;
+    [SerializeField, Range(1000, 5000)] private int baseOrder = 1000;
+    private List<SpriteRenderer> spriteRenderers = new();
 
     void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer == null) throw new Exception($"Attribute {this} cannot be null");
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        
+        if (spriteRenderer != null) spriteRenderers.Add(spriteRenderer);
+        
+        foreach (Transform child in transform)
+        {
+            GameObject gameObject = child.gameObject;
+            gameObject.TryGetComponent<SpriteRenderer>(out SpriteRenderer childSpriteRenderer);
+            if (childSpriteRenderer != null) spriteRenderers.Add(childSpriteRenderer);
+        }
     }
 
     void LateUpdate()
     {
-        spriteRenderer.sortingOrder = (int)(baseOrder - transform.position.y * 100) % 1000;
+        foreach (var s in spriteRenderers) {
+            s.sortingOrder = (int)(baseOrder - transform.position.y * 100) % 10000;
+        }
     }
 }
