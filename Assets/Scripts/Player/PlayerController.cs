@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private bool frozen = false;
+
+    public Vector3 Position => rb.position;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public void Freeze()
     {
         frozen = true;
+        rb.linearVelocity = Vector2.zero;
         animator.SetInteger(DirectionHash, (int)Direction.DOWN);
         enabled = false;
     }

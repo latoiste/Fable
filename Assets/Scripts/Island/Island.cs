@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -73,6 +74,8 @@ public class Island : MonoBehaviour
         }
     }
 
+    public List<ICoinProvider> ActiveCoinProviders() => coinProviderRefs.Where(c => c.IsActive).ToList();
+
     private void TrySwitchIslands()
     {
         // Debug.Log("TrySwitchIslands called");
@@ -83,6 +86,9 @@ public class Island : MonoBehaviour
                 onActivateAltarCalled = true;
                 Debug.Log("SwitchIslands called");
                 _ = GameManager.instance.SwitchIslands();
+
+                int bonusTime = (coinsGathered - CoinsRequired) * 2;
+                GameManager.instance.AddTime(bonusTime);
             }
         }
     }

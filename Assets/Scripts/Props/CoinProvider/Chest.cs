@@ -33,6 +33,9 @@ public class Chest : MonoBehaviour, ICoinProvider
 
     public int CoinAmount() => coinAmount;
 
+    public bool IsActive => !isOpened;
+    public Vector3 Position => transform.position;
+
     private void OpenChest()
     {
         isOpened = true;

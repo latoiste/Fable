@@ -8,8 +8,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerController player;
-    private int islandCount = 3;
+    [SerializeField] private Timer timer;
 
+    private int islandCount = 3;
     private string nextIsland;
     private AsyncOperation preloadOp;
     private bool isPreloaded;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     {
         random = new System.Random();
         if (player == null) throw new Exception($"Attribute player in {this} cannot be null");
+        if (timer == null) throw new Exception($"Attribute timer in {this} cannot be null");
 
         if (instance == null)
         {
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
         await SceneTransition.instance.FadeInAsync();
 
         player.Freeze();
+        timer.Pause();
 
         await LoadNewIsland();
         
@@ -46,18 +49,20 @@ public class GameManager : MonoBehaviour
         player.SetSpawnPoint(newIsland.SpawnPoint);
 
         player.Unfreeze();
+        timer.Resume();
         
-        // play timer
         await SceneTransition.instance.FadeOutAsync();
     }
 
-    // called from altar event
+    public void AddTime(int seconds) => timer.AddTime(seconds);
+
     public async Task SwitchIslands()
     {
         if (isSwitching) return;
 
         isSwitching = true;
         player.Freeze();
+        timer.Pause();
         await SceneTransition.instance.FadeInAsync();
 
         Scene oldIsland = GetCurrentIslandScene();
@@ -74,7 +79,9 @@ public class GameManager : MonoBehaviour
         player.SetSpawnPoint(newIsland.SpawnPoint);
     
         player.Unfreeze();
+        timer.Resume();
         await SceneTransition.instance.FadeOutAsync();
+        
         isSwitching = false;
     }
 

@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour
     private float current;
     private float percentage => current/durationSeconds;
     private bool timerEnd = false;
+    private bool paused = true;
     public Action<float> onTimerUpdate;
 
     void Awake()
@@ -16,7 +17,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (timerEnd) return;
+        if (timerEnd || paused) return;
         
         current = Mathf.Clamp(current - Time.deltaTime, 0, durationSeconds);
 
@@ -25,6 +26,11 @@ public class Timer : MonoBehaviour
         if (current <= 0) timerEnd = true;
     }
 
-    public void Pause() => Time.timeScale = 0f;
-    public void Resume() => Time.timeScale = 1f;
+    public void AddTime(int seconds)
+    {
+        current = Mathf.Clamp(current + seconds, 0, durationSeconds);
+    }
+
+    public void Pause() => paused = true;
+    public void Resume() => paused = false;
 }

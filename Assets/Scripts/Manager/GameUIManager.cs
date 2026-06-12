@@ -1,9 +1,10 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private CoinUI coinUI;   
+    [SerializeField] private CoinUI coinUI;
 
     public static UIManager instance;
 
@@ -23,22 +24,12 @@ public class UIManager : MonoBehaviour
 
     public void AddIslandListener(Island island)
     {
-        InitCoinUI(island.CoinsRequired);
-        island.OnGatheredCoins += UpdateCoinUI;
+        coinUI.InitText(island.CoinsRequired);
+        island.OnGatheredCoins += coinUI.StartAnimateCoins;
     }
 
     public void RemoveIslandListener(Island island)
     {
-        island.OnGatheredCoins -= UpdateCoinUI;
-    }
-
-    private void InitCoinUI(int maxCoins)
-    {
-        coinUI.InitText(maxCoins);
-    }
-
-    private void UpdateCoinUI(int coins)
-    {
-        coinUI.StartAnimateCoins(coins);
+        island.OnGatheredCoins -= coinUI.StartAnimateCoins;
     }
 }
