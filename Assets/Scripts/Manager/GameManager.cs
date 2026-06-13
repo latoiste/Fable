@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     private bool preloadLock = true;
     private bool isSwitching = false;
     private System.Random random;
+    private bool paused = false;
+    private bool canPause = false;
 
     public static GameManager instance;
 
@@ -25,6 +27,8 @@ public class GameManager : MonoBehaviour
         random = new System.Random();
         if (player == null) throw new Exception($"Attribute player in {this} cannot be null");
         if (timer == null) throw new Exception($"Attribute timer in {this} cannot be null");
+
+        PauseKeybind.OnPressed += TogglePause;
 
         if (instance == null)
         {
@@ -40,6 +44,7 @@ public class GameManager : MonoBehaviour
     {
         await SceneTransition.instance.FadeInAsync();
 
+        canPause = false;
         player.Freeze();
         timer.Pause();
 
@@ -50,17 +55,35 @@ public class GameManager : MonoBehaviour
 
         player.Unfreeze();
         timer.Resume();
+        canPause = true;
         
         await SceneTransition.instance.FadeOutAsync();
     }
 
     public void AddTime(int seconds) => timer.AddTime(seconds);
 
+    private void TogglePause()
+    {
+        if (!canPause) return;
+
+        if (paused) {
+            player.Unfreeze();
+            Time.timeScale = 1;
+        } else {
+            player.Freeze();
+            Time.timeScale = 0;
+        }
+        
+        paused = !paused;
+    }
+
     public async Task SwitchIslands()
     {
         if (isSwitching) return;
 
         isSwitching = true;
+
+        canPause = false;
         player.Freeze();
         timer.Pause();
         await SceneTransition.instance.FadeInAsync();
@@ -80,6 +103,10 @@ public class GameManager : MonoBehaviour
     
         player.Unfreeze();
         timer.Resume();
+        canPause = true;
+
+        if (paused) await Task.Yield();
+
         await SceneTransition.instance.FadeOutAsync();
         
         isSwitching = false;
@@ -182,5 +209,10 @@ public class GameManager : MonoBehaviour
         }
 
         return $"Island_{nextIslandIndex}";
+    }
+
+    void OnDestroy()
+    {
+        PauseKeybind.OnPressed -= TogglePause;
     }
 }

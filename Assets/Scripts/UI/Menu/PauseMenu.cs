@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -12,6 +10,8 @@ public class PauseMenu : MonoBehaviour
     {
         canvas = GetComponent<Canvas>();
 
+        PauseKeybind.OnPressed += ToggleScreen;
+
         if (timer == null) throw new Exception($"Attribute timer in {this} cannot be null");
         if (canvas == null) throw new Exception($"Attribute canvas in {this} cannot be null");
     }
@@ -21,37 +21,27 @@ public class PauseMenu : MonoBehaviour
         canvas.enabled = false;
     }
 
-    public void Test()
+    private void ToggleScreen()
     {
-        Debug.Log("AAAAAAAAAa");
-    }
-
-    void Update()
-    {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
             bool visible = canvas.enabled;
-            if (visible)
-            {
-                Hide();
-            } else
-            {
-                Show();
-            }
 
-            Debug.Log("hello");
-        }
+            if (visible) Hide(); else Show();
     }
 
-    public void Show()
+    private void Show()
     {
         timer.Pause();
         canvas.enabled = true;
     }
 
-    public void Hide()
+    private void Hide()
     {
         timer.Resume();
         canvas.enabled = false;
+    }
+
+    void OnDestroy()
+    {
+        PauseKeybind.OnPressed -= ToggleScreen;
     }
 }
