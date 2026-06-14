@@ -38,5 +38,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Islands/Island_2.unity
     guid: 91a5daab00367c6c3a5c109808a31aaa
+  - enabled: 1
+    path: Assets/Scenes/Screen/GameOverScreen.unity
+    guid: 88fadd2c1aaa5a53f8f235f3254afba0
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

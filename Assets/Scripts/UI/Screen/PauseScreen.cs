@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PauseMenu : MonoBehaviour
+public class PauseScreen : MonoBehaviour
 {
     [SerializeField] private Timer timer;
     private Canvas canvas;
@@ -34,7 +34,7 @@ public class PauseMenu : MonoBehaviour
         canvas.enabled = true;
     }
 
-    private void Hide()
+    public void Hide()
     {
         timer.Resume();
         canvas.enabled = false;

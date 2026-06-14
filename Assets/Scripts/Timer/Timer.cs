@@ -8,7 +8,8 @@ public class Timer : MonoBehaviour
     private float percentage => current/durationSeconds;
     private bool timerEnd = false;
     private bool paused = true;
-    public Action<float> onTimerUpdate;
+    public event Action<float> OnTimerUpdate;
+    public event Action OnTimerEnd;
 
     void Awake()
     {
@@ -21,9 +22,12 @@ public class Timer : MonoBehaviour
         
         current = Mathf.Clamp(current - Time.deltaTime, 0, durationSeconds);
 
-        onTimerUpdate?.Invoke(percentage);
+        OnTimerUpdate?.Invoke(percentage);
         
-        if (current <= 0) timerEnd = true;
+        if (current <= 0) {
+            timerEnd = true;
+            OnTimerEnd.Invoke();
+        }
     }
 
     public void AddTime(int seconds)

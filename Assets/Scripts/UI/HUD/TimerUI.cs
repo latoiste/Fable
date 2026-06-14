@@ -13,13 +13,13 @@ public class TimerUI : MonoBehaviour
         if (timer == null) throw new Exception($"Attribute timer in {this} cannot be null");
         if (slider == null) throw new Exception($"Attribute slider in {this} cannot be null");
 
-        timer.onTimerUpdate += UpdateSliderValue;
+        timer.OnTimerUpdate += UpdateSliderValue;
     }
 
     private void UpdateSliderValue(float value) => slider.value = value;
 
     void OnDestroy()
     {
-        timer.onTimerUpdate -= UpdateSliderValue;
+        timer.OnTimerUpdate -= UpdateSliderValue;
     }
 }

@@ -554,6 +554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   player: {fileID: 435612850}
   timer: {fileID: 1003252775}
+  hud: {fileID: 847278171}
 --- !u!4 &677316535
 Transform:
   m_ObjectHideFlags: 0
@@ -569,6 +570,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!223 &847278171 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 124944183937641329, guid: ddb75795ee293585db441c0362cdb6e8, type: 3}
+  m_PrefabInstance: {fileID: 1338170095}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1000116193
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,7 +770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8160daaab9e718bf8a47bb4d5e369daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
-  durationSeconds: 60
+  durationSeconds: 3.8
 --- !u!1001 &1338170095
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -852,6 +858,10 @@ PrefabInstance:
     - target: {fileID: 67589688043142414, guid: ddb75795ee293585db441c0362cdb6e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 124944183937641329, guid: ddb75795ee293585db441c0362cdb6e8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4534857430314652633, guid: ddb75795ee293585db441c0362cdb6e8, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1058,7 +1068,11 @@ PrefabInstance:
       objectReference: {fileID: 1003252775}
     - target: {fileID: 5517056479646002771, guid: 7b67ed5144892f7c79449a4c1ab697e4, type: 3}
       propertyPath: m_Name
-      value: PauseMenu
+      value: PauseScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447165684993785013, guid: 7b67ed5144892f7c79449a4c1ab697e4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

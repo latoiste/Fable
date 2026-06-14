@@ -3,12 +3,14 @@ using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerController player;
     [SerializeField] private Timer timer;
+    [SerializeField] private Canvas hud;
 
     private int islandCount = 3;
     private string nextIsland;
@@ -24,11 +26,14 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        InputSystem.EnableDevice(Keyboard.current);
         random = new System.Random();
         if (player == null) throw new Exception($"Attribute player in {this} cannot be null");
         if (timer == null) throw new Exception($"Attribute timer in {this} cannot be null");
+        if (hud == null) throw new Exception($"Attribute hud in {this} cannot be null");
 
         PauseKeybind.OnPressed += TogglePause;
+        timer.OnTimerEnd += OnGameOver;
 
         if (instance == null)
         {
@@ -42,22 +47,22 @@ public class GameManager : MonoBehaviour
 
     async void Start()
     {
-        // await SceneTransition.instance.FadeInAsync();
+        await SceneTransition.instance.FadeInAsync();
 
-        // canPause = false;
-        // player.Freeze();
-        // timer.Pause();
+        canPause = false;
+        player.Freeze();
+        timer.Pause();
 
-        // await LoadNewIsland();
+        await LoadNewIsland();
         
-        // Island newIsland = GetIslandObject();
-        // player.SetSpawnPoint(newIsland.SpawnPoint);
+        Island newIsland = GetIslandObject();
+        player.SetSpawnPoint(newIsland.SpawnPoint);
 
         player.Unfreeze();
         timer.Resume();
         canPause = true;
         
-        // await SceneTransition.instance.FadeOutAsync();
+        await SceneTransition.instance.FadeOutAsync();
     }
 
     public void AddTime(int seconds) => timer.AddTime(seconds);
@@ -75,6 +80,22 @@ public class GameManager : MonoBehaviour
         }
         
         paused = !paused;
+    }
+
+    private void OnGameOver()
+    {
+        _ = GameOver();
+    }
+
+    private async Task GameOver()
+    {
+        await SceneManager.LoadSceneAsync("GameOverScreen");
+        Scene currentIsland = GetCurrentIslandScene();
+        if (currentIsland.IsValid())
+        {
+            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(currentIsland); 
+            while (!unloadOp.isDone) await Task.Yield();   
+        }
     }
 
     public async Task SwitchIslands()
@@ -214,5 +235,6 @@ public class GameManager : MonoBehaviour
     void OnDestroy()
     {
         PauseKeybind.OnPressed -= TogglePause;
+        timer.OnTimerEnd -= OnGameOver;
     }
 }
