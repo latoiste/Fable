@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2656536558134782699}
   - component: {fileID: 3212696894657242628}
-  m_Layer: 20
+  m_Layer: 7
   m_Name: Collider L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,8 +160,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1869315837
-  m_SortingLayer: 0
+  m_SortingLayerID: -659152483
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300018, guid: dda6bbdb704d84847b38f9eced72bf59, type: 3}
@@ -251,8 +251,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1869315837
-  m_SortingLayer: 0
+  m_SortingLayerID: -659152483
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300074, guid: ed7554aeefd5da44a9fe1ee9b93afe77, type: 3}
@@ -275,7 +275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1961833940562377590}
   - component: {fileID: 1756894650326271120}
-  m_Layer: 20
+  m_Layer: 7
   m_Name: Collider R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,9 +425,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -44025399
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -911356973
+  m_SortingLayer: 5
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300016, guid: dda6bbdb704d84847b38f9eced72bf59, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -486,7 +486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1258036171812274837}
   - component: {fileID: 163175278694551596}
-  m_Layer: 21
+  m_Layer: 8
   m_Name: Collider T
   m_TagString: Untagged
   m_Icon: {fileID: 0}

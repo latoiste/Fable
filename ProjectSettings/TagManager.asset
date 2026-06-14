@@ -13,9 +13,9 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
+  - Layer 1
+  - Layer 2
+  - Layer 3
   - 
   - 
   - 
@@ -42,14 +42,26 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ground
+  - name: Ground - Layer 1
     uniqueID: 3635814813
     locked: 0
-  - name: Wall
+  - name: Wall - Layer 1
     uniqueID: 3239379469
     locked: 0
-  - name: World
+  - name: World - Layer 1
     uniqueID: 2391005657
+    locked: 0
+  - name: Ground - Layer 2
+    uniqueID: 3025527765
+    locked: 0
+  - name: Wall - Layer 2
+    uniqueID: 3383610323
+    locked: 0
+  - name: World - Layer 2
+    uniqueID: 2970007357
+    locked: 0
+  - name: New Layer 7
+    uniqueID: 382791713
     locked: 0
   m_RenderingLayers:
   - Default

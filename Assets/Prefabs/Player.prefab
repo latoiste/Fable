@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4783431930894831579}
   - component: {fileID: 617350248766206107}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 5466565117414677337}
   - component: {fileID: 3970812135360543209}
   - component: {fileID: 2782445414689796242}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ad9e810d593a6a7b314e0c02ec6298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 1
+  moveSpeed: 5
 --- !u!114 &3970812135360543209
 MonoBehaviour:
   m_ObjectHideFlags: 0

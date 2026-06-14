@@ -42,22 +42,22 @@ public class GameManager : MonoBehaviour
 
     async void Start()
     {
-        await SceneTransition.instance.FadeInAsync();
+        // await SceneTransition.instance.FadeInAsync();
 
-        canPause = false;
-        player.Freeze();
-        timer.Pause();
+        // canPause = false;
+        // player.Freeze();
+        // timer.Pause();
 
-        await LoadNewIsland();
+        // await LoadNewIsland();
         
-        Island newIsland = GetIslandObject();
-        player.SetSpawnPoint(newIsland.SpawnPoint);
+        // Island newIsland = GetIslandObject();
+        // player.SetSpawnPoint(newIsland.SpawnPoint);
 
         player.Unfreeze();
         timer.Resume();
         canPause = true;
         
-        await SceneTransition.instance.FadeOutAsync();
+        // await SceneTransition.instance.FadeOutAsync();
     }
 
     public void AddTime(int seconds) => timer.AddTime(seconds);
