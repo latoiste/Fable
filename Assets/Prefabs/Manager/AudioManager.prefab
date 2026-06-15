@@ -51,6 +51,7 @@ MonoBehaviour:
   openChestSound: {fileID: 8300000, guid: 46fb0049a1202709db0c4c4f42246351, type: 3}
   islandCompleteSound: {fileID: 8300000, guid: b4db5b493b4ead4efb31329c8da43814, type: 3}
   buttonClickSound: {fileID: 8300000, guid: c18d38aaa90f2fc5a8c0c5c87db22f5d, type: 3}
+  newHighscoreSound: {fileID: 8300000, guid: 45ee762da23127b1fba82611bbd682fc, type: 3}
 --- !u!82 &7083272682397792533
 AudioSource:
   m_ObjectHideFlags: 0

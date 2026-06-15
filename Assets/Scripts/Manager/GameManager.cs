@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,10 +18,13 @@ public class GameManager : MonoBehaviour
     private System.Random random;
     private bool paused = false;
     private bool canPause = false;
+    private int score;
 
     void Awake()
     {
         random = new System.Random();
+        score = 0;
+
         if (player == null) throw new Exception($"Attribute player in {this} cannot be null");
         if (timer == null) throw new Exception($"Attribute timer in {this} cannot be null");
 
@@ -68,6 +72,8 @@ public class GameManager : MonoBehaviour
 
     private void OnGameOver()
     {
+        SaveManager.CurrentRunScore = score;
+        SaveManager.Highscore = math.max(score, SaveManager.Highscore);
         Debug.Log("Game over");
         _ = GameOver();
     }
@@ -83,6 +89,7 @@ public class GameManager : MonoBehaviour
 
     public void StartSwitchIslands()
     {
+        score++;
         _ = SwitchIslands();
     }
 

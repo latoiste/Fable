@@ -6,6 +6,7 @@ public enum AudioClips
     OpenChest,
     IslandComplete,
     ButtonClick,
+    NewHighscore,
 }
 
 public class AudioManager : MonoBehaviour
@@ -16,6 +17,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip openChestSound;
     [SerializeField] private AudioClip islandCompleteSound;
     [SerializeField] private AudioClip buttonClickSound;
+    [SerializeField] private AudioClip newHighscoreSound;
 
     private Dictionary<AudioClips, AudioClip> audioClips = new();
     public static AudioManager instance;
@@ -30,6 +32,7 @@ public class AudioManager : MonoBehaviour
             audioClips.Add(AudioClips.OpenChest, openChestSound);
             audioClips.Add(AudioClips.IslandComplete, islandCompleteSound);
             audioClips.Add(AudioClips.ButtonClick, buttonClickSound);
+            audioClips.Add(AudioClips.NewHighscore, newHighscoreSound);
         } else
         {
             Destroy(gameObject);

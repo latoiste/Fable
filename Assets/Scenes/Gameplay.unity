@@ -720,7 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8160daaab9e718bf8a47bb4d5e369daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
-  durationSeconds: 13.5
+  durationSeconds: 30
 --- !u!1001 &1338170095
 PrefabInstance:
   m_ObjectHideFlags: 0
