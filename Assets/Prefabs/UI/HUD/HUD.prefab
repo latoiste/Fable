@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 124944183937641329}
   - component: {fileID: 5019490603462518698}
   - component: {fileID: 6525302812176200022}
+  - component: {fileID: 5453847809920428318}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -104,6 +105,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5453847809920428318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7723402589722481471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d866f7ee7ff2b45a1aaa3c1f0ccc36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  coinUI: {fileID: 8234324759220687446}
 --- !u!1001 &3423802543554731477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -222,6 +236,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7074924729604311143, guid: eb613f9f71d306f0bad62ef1edca432b, type: 3}
   m_PrefabInstance: {fileID: 3423802543554731477}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8234324759220687446 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6757080561235595139, guid: eb613f9f71d306f0bad62ef1edca432b, type: 3}
+  m_PrefabInstance: {fileID: 3423802543554731477}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da49c3ec15678a34a7cfddbd33ed8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinUI
 --- !u!1001 &3540695972524296513
 PrefabInstance:
   m_ObjectHideFlags: 0

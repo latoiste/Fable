@@ -15,14 +15,12 @@ public class Island : MonoBehaviour
     private int coinsGathered = 0;
     private List<ICoinProvider> coinProviderRefs = new();
 
-    public Action<int> OnGatheredCoins;
+    public event Action<int> OnGatheredCoins;
 
-    public UnityEvent OnActivateAltar;
-    public bool onActivateAltarCalled;
-    public UnityEvent OnEnoughCoins;
-    public bool onEnoughCoinsCalled;
+    public event Action OnIslandCompleted;
+    public event Action<int> OnAddBonusTime;
+    private bool onIslandCompletedCalled;
 
-    // public Vector3 SpawnPoint => altar.transform.position;
     public Vector3 SpawnPoint => altar.transform.position - new Vector3(0, -1, 0);
 
     void Awake()
@@ -30,12 +28,7 @@ public class Island : MonoBehaviour
         if (coinProviders == null) throw new Exception($"Attribute coinProviders in {this} cannot be null");
         if (altar == null) throw new Exception($"Attribute altar in {this} cannot be null");
         
-    }
-
-    public void Start()
-    {
-        onActivateAltarCalled = false;
-        onEnoughCoinsCalled = false;
+        onIslandCompletedCalled = false;
         
         foreach (Transform child in coinProviders)
         {
@@ -54,8 +47,6 @@ public class Island : MonoBehaviour
 
         CoinsRequired = (int)(totalCoins * 0.5) + 1;
 
-        UIManager.instance.AddIslandListener(this);
-        OnEnoughCoins.AddListener(GameManager.instance.StartPreloadIsland);
         altar.OnAltarActivated.AddListener(TrySwitchIslands);
     }
 
@@ -63,15 +54,6 @@ public class Island : MonoBehaviour
     {
         coinsGathered += amount;
         OnGatheredCoins.Invoke(coinsGathered);
-
-        if (coinsGathered >= CoinsRequired)
-        {
-            if (!onEnoughCoinsCalled) {
-                // Debug.Log("OnEnoughCoins invoked");
-                onEnoughCoinsCalled = true;
-                OnEnoughCoins.Invoke();
-            }
-        }
     }
 
     public List<ICoinProvider> ActiveCoinProviders() => coinProviderRefs.Where(c => c.IsActive).ToList();
@@ -82,14 +64,13 @@ public class Island : MonoBehaviour
         // Debug.Log($"ActivateAltarCalled: {onActivateAltarCalled}");
         if (coinsGathered >= CoinsRequired)
         {
-            if (!onActivateAltarCalled) {
-                onActivateAltarCalled = true;
-                Debug.Log("SwitchIslands called");
+            if (!onIslandCompletedCalled) {
+                onIslandCompletedCalled = true;
+                OnIslandCompleted.Invoke();
                 AudioManager.instance.PlaySfx(AudioClips.IslandComplete);
-                _ = GameManager.instance.SwitchIslands();
 
                 int bonusTime = (coinsGathered - CoinsRequired) * 2;
-                GameManager.instance.AddTime(bonusTime);
+                OnAddBonusTime.Invoke(bonusTime);
             }
         }
     }
@@ -101,8 +82,6 @@ public class Island : MonoBehaviour
             if (provider != null) provider.OnActivated -= AddCoinsGathered;
         }
 
-        OnEnoughCoins.RemoveListener(GameManager.instance.StartPreloadIsland);
-        UIManager.instance.RemoveIslandListener(this);
         altar.OnAltarActivated.RemoveListener(TrySwitchIslands);
     }
 }

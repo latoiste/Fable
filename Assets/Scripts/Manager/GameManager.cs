@@ -3,53 +3,32 @@ using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerController player;
     [SerializeField] private Timer timer;
-    [SerializeField] private Canvas hud;
+    [SerializeField] private Hud hud;
 
     private int islandCount = 3;
     private string nextIsland;
-    private AsyncOperation preloadOp;
-    private bool isPreloaded;
-    private bool preloadLock = true;
     private bool isSwitching = false;
     private System.Random random;
     private bool paused = false;
     private bool canPause = false;
-
-    public static GameManager instance;
 
     void Awake()
     {
         random = new System.Random();
         if (player == null) throw new Exception($"Attribute player in {this} cannot be null");
         if (timer == null) throw new Exception($"Attribute timer in {this} cannot be null");
-        if (hud == null) throw new Exception($"Attribute hud in {this} cannot be null");
 
         PauseKeybind.OnPressed += TogglePause;
         timer.OnTimerEnd += OnGameOver;
-
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this);
-        } else
-        {
-            Destroy(gameObject);
-        }
     }
 
-    void Start()
-    {
-        StartGame();
-    }
-
-    public async void StartGame()
+    async void Start()
     {
         await SceneTransition.instance.FadeInAsync();
 
@@ -60,6 +39,7 @@ public class GameManager : MonoBehaviour
         await LoadNewIsland();
         
         Island newIsland = GetIslandObject();
+        AddIslandListener(newIsland);
         player.SetSpawnPoint(newIsland.SpawnPoint);
 
         player.Unfreeze();
@@ -94,37 +74,42 @@ public class GameManager : MonoBehaviour
 
     private async Task GameOver()
     {
+        Debug.Log("Loading Game Over Screen");
+        
         await SceneManager.LoadSceneAsync("GameOverScreen");
         Scene currentIsland = GetCurrentIslandScene();
-        if (currentIsland.IsValid())
-        {
-            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(currentIsland); 
-            while (!unloadOp.isDone) await Task.Yield();   
-        }
+        _ = UnloadScene(currentIsland);
     }
 
-    public async Task SwitchIslands()
+    public void StartSwitchIslands()
+    {
+        _ = SwitchIslands();
+    }
+
+    private async Task SwitchIslands()
     {
         if (isSwitching) return;
 
         isSwitching = true;
+        await SceneTransition.instance.FadeInAsync();
 
         canPause = false;
         player.Freeze();
         timer.Pause();
-        await SceneTransition.instance.FadeInAsync();
 
-        Scene oldIsland = GetCurrentIslandScene();
+        Scene oldIslandScene = GetCurrentIslandScene();
+        if (oldIslandScene.IsValid())
+        {
+            Island oldIsland = GetIslandObject();
+            RemoveIslandListener(oldIsland);  
+        }
 
         await LoadNewIsland();
 
-        if (oldIsland.IsValid())
-        {
-            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(oldIsland); 
-            while (!unloadOp.isDone) await Task.Yield();
-        }
+        await UnloadScene(oldIslandScene);
 
         Island newIsland = GetIslandObject();
+        AddIslandListener(newIsland);
         player.SetSpawnPoint(newIsland.SpawnPoint);
     
         player.Unfreeze();
@@ -138,57 +123,30 @@ public class GameManager : MonoBehaviour
         isSwitching = false;
     }
 
-    // Event when player gathers enough coins
-    public void StartPreloadIsland()
+    private void AddIslandListener(Island island)
     {
-        StartCoroutine(PreloadIsland());
+        island.OnIslandCompleted += StartSwitchIslands;
+        island.OnAddBonusTime += AddTime;
+
+        hud.AddIslandListener(island);
     }
 
-    private IEnumerator PreloadIsland()
+    private void RemoveIslandListener(Island island)
     {
-        if (isPreloaded) yield return null;
-
-        Debug.Log("Preloading");
-        isPreloaded = true;
-        preloadLock = true;
-        nextIsland = NextIslandName();
-
-        if (string.IsNullOrEmpty(nextIsland))
-        {
-            Debug.LogWarning("nextIsland is not set, cannot preload next island scene");
-            preloadLock = false;
-            isPreloaded = false;
-            yield return null;
-        }
-
-        preloadOp = SceneManager.LoadSceneAsync(nextIsland, LoadSceneMode.Additive);
-        preloadOp.allowSceneActivation = false;
-
-        while (preloadOp.progress < 0.9f) yield return null;
-
-        preloadLock = false;
+        island.OnIslandCompleted -= StartSwitchIslands;
+        island.OnAddBonusTime -= AddTime;
+        
+        hud.RemoveIslandListener(island);
     }
 
     private async Task LoadNewIsland()
     {
-        if (isPreloaded)
-        {
-            while (preloadLock) await Task.Yield();
-        } else
-        {
-            nextIsland = NextIslandName();
-            if (string.IsNullOrEmpty(nextIsland)) {
-                Debug.LogWarning("nextIsland is not set, cannot preload next island scene");
-                return;
-            }
-            preloadOp = SceneManager.LoadSceneAsync(nextIsland, LoadSceneMode.Additive);
+        nextIsland = NextIslandName();
+        if (string.IsNullOrEmpty(nextIsland)) {
+            Debug.LogWarning("nextIsland is not set, cannot preload next island scene");
+            return;
         }
-
-        preloadOp.allowSceneActivation = true;
-        while (!preloadOp.isDone) await Task.Yield();
-
-        preloadOp = null;
-        isPreloaded = false;
+        await SceneManager.LoadSceneAsync(nextIsland, LoadSceneMode.Additive);
     }
 
     private Scene GetCurrentIslandScene()
@@ -235,6 +193,15 @@ public class GameManager : MonoBehaviour
         }
 
         return $"Island_{nextIslandIndex}";
+    }
+
+    private async Task UnloadScene(Scene scene)
+    {
+        if (scene.IsValid())
+        {
+            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(scene); 
+            while (!unloadOp.isDone) await Task.Yield();   
+        }
     }
 
     void OnDestroy()

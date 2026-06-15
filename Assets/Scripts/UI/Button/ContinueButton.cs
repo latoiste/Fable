@@ -17,6 +17,5 @@ public class ContinueButton : BaseButton
     {
         await SceneTransition.instance.FadeInAsync();
         await SceneManager.LoadSceneAsync("Gameplay");
-        GameManager.instance.StartGame();
     }
 }

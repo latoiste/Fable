@@ -2,28 +2,18 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class Hud : MonoBehaviour
 {
     [SerializeField] private CoinUI coinUI;
 
-    public static UIManager instance;
-
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this);
-        } else
-        {
-            Destroy(gameObject);
-        }
-
         if (coinUI == null) throw new Exception("CoinUI in UIManager cannot be null");
     }
 
     public void AddIslandListener(Island island)
     {
+        Debug.Log($"set coin ui to {island.CoinsRequired}");
         coinUI.InitText(island.CoinsRequired);
         island.OnGatheredCoins += coinUI.StartAnimateCoins;
     }

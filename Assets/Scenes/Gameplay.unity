@@ -119,51 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &90462091
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 90462093}
-  - component: {fileID: 90462092}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &90462092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90462091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9d866f7ee7ff2b45a1aaa3c1f0ccc36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  coinUI: {fileID: 1338170096}
---- !u!4 &90462093
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90462091}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &246446542 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2733631802877295935, guid: b7e9a79b1917a7d298a87bdcd2717f3e, type: 3}
@@ -554,7 +509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   player: {fileID: 435612850}
   timer: {fileID: 1003252775}
-  hud: {fileID: 847278171}
+  hud: {fileID: 1338170096}
 --- !u!4 &677316535
 Transform:
   m_ObjectHideFlags: 0
@@ -570,11 +525,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!223 &847278171 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 124944183937641329, guid: ddb75795ee293585db441c0362cdb6e8, type: 3}
-  m_PrefabInstance: {fileID: 1338170095}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1000116193
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,15 +836,15 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: ddb75795ee293585db441c0362cdb6e8, type: 3}
 --- !u!114 &1338170096 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8234324759220687446, guid: ddb75795ee293585db441c0362cdb6e8, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5453847809920428318, guid: ddb75795ee293585db441c0362cdb6e8, type: 3}
   m_PrefabInstance: {fileID: 1338170095}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3da49c3ec15678a34a7cfddbd33ed8cf, type: 3}
+  m_Script: {fileID: 11500000, guid: e9d866f7ee7ff2b45a1aaa3c1f0ccc36, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoinUI
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
 --- !u!1 &1965289998
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,6 +1197,5 @@ SceneRoots:
   - {fileID: 4766420723805640112}
   - {fileID: 1338170095}
   - {fileID: 2117946590}
-  - {fileID: 90462093}
   - {fileID: 1000116195}
   - {fileID: 6419010557845888515}
