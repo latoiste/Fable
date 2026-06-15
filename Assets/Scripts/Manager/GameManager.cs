@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        InputSystem.EnableDevice(Keyboard.current);
         random = new System.Random();
         if (player == null) throw new Exception($"Attribute player in {this} cannot be null");
         if (timer == null) throw new Exception($"Attribute timer in {this} cannot be null");
@@ -45,7 +44,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    async void Start()
+    void Start()
+    {
+        StartGame();
+    }
+
+    public async void StartGame()
     {
         await SceneTransition.instance.FadeInAsync();
 
@@ -84,6 +88,7 @@ public class GameManager : MonoBehaviour
 
     private void OnGameOver()
     {
+        Debug.Log("Game over");
         _ = GameOver();
     }
 

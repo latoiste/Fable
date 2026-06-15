@@ -85,6 +85,7 @@ public class Island : MonoBehaviour
             if (!onActivateAltarCalled) {
                 onActivateAltarCalled = true;
                 Debug.Log("SwitchIslands called");
+                AudioManager.instance.PlaySfx(AudioClips.IslandComplete);
                 _ = GameManager.instance.SwitchIslands();
 
                 int bonusTime = (coinsGathered - CoinsRequired) * 2;

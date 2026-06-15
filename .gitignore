@@ -1,5 +1,8 @@
 .vscode/
 
+**.wav*
+**.mp3*
+**.ogg*
 *.csproj
 *.sln
 *.slnx

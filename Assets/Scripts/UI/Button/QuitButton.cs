@@ -1,22 +1,9 @@
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
-public class QuitButton : MonoBehaviour
+public class QuitButton : BaseButton
 {
-    private Button button;
-    private bool isPressed; 
-
-    void Awake()
-    {
-        isPressed = false;
-        button = GetComponent<Button>();
-        button.onClick.AddListener(QuitGame);
-    }
-
-    private void QuitGame()
+    protected override void OnClick()
     {
         if (isPressed) return;
         isPressed = true;
@@ -26,10 +13,5 @@ public class QuitButton : MonoBehaviour
         #endif
 
         Application.Quit();
-    }
-
-    void OnDestroy()
-    {
-        button.onClick.RemoveListener(QuitGame);
     }
 }

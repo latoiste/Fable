@@ -3,19 +3,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StartButton : BaseButton
+public class ContinueButton : BaseButton
 {
     protected override void OnClick()
     {
         if (isPressed) return;
         isPressed = true;
         
-        _ = StartGame();
+        _ = Restart();
     }
 
-    private async Task StartGame()
+    private async Task Restart()
     {
         await SceneTransition.instance.FadeInAsync();
         await SceneManager.LoadSceneAsync("Gameplay");
+        GameManager.instance.StartGame();
     }
 }

@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chest
   openedSprite: {fileID: 21300040, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+  openSound: {fileID: 8300000, guid: 46fb0049a1202709db0c4c4f42246351, type: 3}
 --- !u!114 &8932992057461576850
 MonoBehaviour:
   m_ObjectHideFlags: 0

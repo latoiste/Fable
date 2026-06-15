@@ -3,20 +3,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
-public class ReturnToTitleScreenButton : MonoBehaviour
+public class ReturnToTitleScreenButton : BaseButton
 {
-    private Button button;
-    private bool isPressed; 
-
-    void Awake()
-    {
-        isPressed = false;
-        button = GetComponent<Button>();
-        button.onClick.AddListener(OnClick);
-    }
-
-    private void OnClick()
+    protected override void OnClick()
     {
         if (isPressed) return;
         isPressed = true;
@@ -27,10 +16,5 @@ public class ReturnToTitleScreenButton : MonoBehaviour
     private async Task ReturnToTitleScreen()
     {
         await SceneManager.LoadSceneAsync("TitleScreen");
-    }
-
-    void OnDestroy()
-    {
-        button.onClick.RemoveListener(OnClick);
     }
 }

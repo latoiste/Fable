@@ -27,6 +27,7 @@ public class Chest : MonoBehaviour, ICoinProvider
 
         if (other.CompareTag("Player")) {
             OpenChest();
+            AudioManager.instance.PlaySfx(AudioClips.OpenChest);
             OnActivated?.Invoke(coinAmount);
         }
     }
