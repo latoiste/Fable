@@ -59,6 +59,16 @@ public class PlayerController : MonoBehaviour
         rb.position = spawn;
     }
 
+    public void SetLayer(string layer)
+    {
+        gameObject.layer = LayerMask.NameToLayer(layer);
+    }
+
+    public void SetSortingLayer(string sortingLayer)
+    {
+        sprite.sortingLayerName = sortingLayer;    
+    }
+
     void Update()
     {
         if (rb.linearVelocityX > 0)

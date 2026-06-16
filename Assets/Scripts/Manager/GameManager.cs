@@ -44,13 +44,20 @@ public class GameManager : MonoBehaviour
         
         Island newIsland = GetIslandObject();
         AddIslandListener(newIsland);
-        player.SetSpawnPoint(newIsland.SpawnPoint);
+        OnNewIslandLoaded(newIsland);
 
         player.Unfreeze();
         timer.Resume();
         canPause = true;
         
         await SceneTransition.instance.FadeOutAsync();
+    }
+
+    private void OnNewIslandLoaded(Island island)
+    {
+        player.SetSpawnPoint(island.SpawnPoint);
+        player.SetLayer(island.startingLayer);
+        player.SetSortingLayer(island.startingSortingLayer);
     }
 
     public void AddTime(int seconds) => timer.AddTime(seconds);
@@ -117,7 +124,7 @@ public class GameManager : MonoBehaviour
 
         Island newIsland = GetIslandObject();
         AddIslandListener(newIsland);
-        player.SetSpawnPoint(newIsland.SpawnPoint);
+        OnNewIslandLoaded(newIsland);
     
         player.Unfreeze();
         timer.Resume();

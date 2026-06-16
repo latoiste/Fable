@@ -941,6 +941,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Island
   altar: {fileID: 475140184}
   coinProviders: {fileID: 1531059461}
+  startingLayer: Layer 2
+  startingSortingLayer: World - Layer 2
 --- !u!4 &210731863
 Transform:
   m_ObjectHideFlags: 0
@@ -17137,7 +17139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3188900645615484536, guid: 08c7ec1f22edfaa99980bfa1705c509c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.74
+      value: 22.49
       objectReference: {fileID: 0}
     - target: {fileID: 3188900645615484536, guid: 08c7ec1f22edfaa99980bfa1705c509c, type: 3}
       propertyPath: m_LocalPosition.z

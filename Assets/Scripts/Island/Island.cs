@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Island : MonoBehaviour
 {
     [SerializeField] private Altar altar;
     [SerializeField] private Transform coinProviders;
+    [SerializeField] public string startingLayer = "Layer 1";
+    [SerializeField] public string startingSortingLayer = "World - Layer 1";
 
     private int totalCoins;
     public int CoinsRequired { get; private set; }
