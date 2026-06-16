@@ -11,22 +11,24 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerController player;
     [SerializeField] private Timer timer;
     [SerializeField] private Hud hud;
+    [SerializeField] private AudioSource bgm;
 
-    private int islandCount = 3;
+    private int islandCount = 2;
     private string nextIsland;
     private bool isSwitching = false;
     private System.Random random;
     private bool paused = false;
     private bool canPause = false;
-    private int score;
 
     void Awake()
     {
         random = new System.Random();
-        score = 0;
+        SaveManager.CurrentRunScore = 0;
 
         if (player == null) throw new Exception($"Attribute player in {this} cannot be null");
         if (timer == null) throw new Exception($"Attribute timer in {this} cannot be null");
+        if (hud == null) throw new Exception($"Attribute hud in {this} cannot be null");
+        if (bgm == null) throw new Exception($"Attribute audio in {this} cannot be null");
 
         PauseKeybind.OnPressed += TogglePause;
         timer.OnTimerEnd += OnGameOver;
@@ -67,9 +69,11 @@ public class GameManager : MonoBehaviour
         if (!canPause) return;
 
         if (paused) {
+            bgm.volume = 1f;
             player.Unfreeze();
             Time.timeScale = 1;
         } else {
+            bgm.volume = 0.4f;
             player.Freeze();
             Time.timeScale = 0;
         }
@@ -79,8 +83,7 @@ public class GameManager : MonoBehaviour
 
     private void OnGameOver()
     {
-        SaveManager.CurrentRunScore = score;
-        SaveManager.Highscore = math.max(score, SaveManager.Highscore);
+        SaveManager.Highscore = math.max(SaveManager.CurrentRunScore, SaveManager.Highscore);
         Debug.Log("Game over");
         _ = GameOver();
     }
@@ -96,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     public void StartSwitchIslands()
     {
-        score++;
+        SaveManager.CurrentRunScore++;
         _ = SwitchIslands();
     }
 

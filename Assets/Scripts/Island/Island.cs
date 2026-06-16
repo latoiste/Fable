@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Island : MonoBehaviour
@@ -45,7 +46,8 @@ public class Island : MonoBehaviour
             }
         }
 
-        CoinsRequired = (int)(totalCoins * 0.5) + 1;
+        float multiplier = (float)math.min(0.7, 0.3f + SaveManager.CurrentRunScore/5f * 0.2f);
+        CoinsRequired = math.max((int)(totalCoins * multiplier), 1);
 
         altar.OnAltarActivated.AddListener(TrySwitchIslands);
     }

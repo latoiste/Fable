@@ -14,8 +14,7 @@ public class Chest : MonoBehaviour, ICoinProvider
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         
-        System.Random random = new();
-        coinAmount = random.Next(1, 6);
+        coinAmount = 5;
 
         if (spriteRenderer == null) throw new Exception($"SpriteRenderer in {this} not found");
         if (openedSprite == null) throw new Exception($"Attribute openedSprite in {this} cannot be null");
@@ -31,6 +30,7 @@ public class Chest : MonoBehaviour, ICoinProvider
             OnActivated?.Invoke(coinAmount);
         }
     }
+
 
     public int CoinAmount() => coinAmount;
 
