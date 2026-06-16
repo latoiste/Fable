@@ -27,10 +27,10 @@ public class GameOverScreen : MonoBehaviour
         buttons.blocksRaycasts = false;
         Sequence sequence = DOTween.Sequence();
 
-        sequence.Append(text.transform.DOLocalMoveY(140, 4f));
+        sequence.Append(text.transform.DOLocalMoveY(300, 4f));
         sequence.Join(text.DOFade(1f, 3.5f));
 
-        sequence.Join(buttons.transform.DOLocalMoveY(-40f, 4f));
+        sequence.Join(buttons.transform.DOLocalMoveY(-160f, 4f));
         sequence.Join(buttons.DOFade(1f, 3.5f));
 
         await sequence.AsyncWaitForCompletion();
@@ -42,7 +42,7 @@ public class GameOverScreen : MonoBehaviour
         {
             await Task.Delay(1000);
             AudioManager.instance.PlaySfx(AudioClips.NewHighscore);
-            scoreText.text += "\n<size=40>NEW HIGHSCORE</size>";
+            scoreText.text += "\n<size=80>NEW HIGHSCORE!</size>";
         }
         buttons.blocksRaycasts = true;
     }

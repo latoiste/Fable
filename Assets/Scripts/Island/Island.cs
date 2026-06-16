@@ -30,7 +30,7 @@ public class Island : MonoBehaviour
         if (altar == null) throw new Exception($"Attribute altar in {this} cannot be null");
         
         onIslandCompletedCalled = false;
-        
+
         foreach (Transform child in coinProviders)
         {
             bool isCoinProvider = child.TryGetComponent<ICoinProvider>(out ICoinProvider provider);
@@ -45,12 +45,20 @@ public class Island : MonoBehaviour
                 Debug.LogWarning($"{child.name} in {this} is not a CoinProvider");
             }
         }
-
         float multiplier = (float)math.min(0.7, 0.3f + SaveManager.CurrentRunScore/5f * 0.2f);
         CoinsRequired = math.max((int)(totalCoins * multiplier), 1);
 
+        Debug.Log($"multiplier: {multiplier}");
+        Debug.Log($"Score: {SaveManager.CurrentRunScore}");
+        Debug.Log($"Total coins: {totalCoins}");
+        Debug.Log($"Coins required: {CoinsRequired}");
+
         altar.OnAltarActivated.AddListener(TrySwitchIslands);
     }
+
+    // public void CaclulateCoinsRequired()
+    // {
+    // }
 
     public void AddCoinsGathered(int amount)
     {
@@ -68,11 +76,11 @@ public class Island : MonoBehaviour
         {
             if (!onIslandCompletedCalled) {
                 onIslandCompletedCalled = true;
-                OnIslandCompleted.Invoke();
+                OnIslandCompleted?.Invoke();
                 AudioManager.instance.PlaySfx(AudioClips.IslandComplete);
 
                 int bonusTime = (coinsGathered - CoinsRequired) * 2;
-                OnAddBonusTime.Invoke(bonusTime);
+                OnAddBonusTime?.Invoke(bonusTime);
             }
         }
     }

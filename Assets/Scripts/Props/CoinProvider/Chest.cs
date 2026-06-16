@@ -7,15 +7,13 @@ public class Chest : MonoBehaviour, ICoinProvider
     private SpriteRenderer spriteRenderer;
     private bool isOpened = false;
 
-    private int coinAmount;
+    private int coinAmount = 5;
     public event Action<int> OnActivated;
 
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         
-        coinAmount = 5;
-
         if (spriteRenderer == null) throw new Exception($"SpriteRenderer in {this} not found");
         if (openedSprite == null) throw new Exception($"Attribute openedSprite in {this} cannot be null");
     }

@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
         await LoadNewIsland();
         
         Island newIsland = GetIslandObject();
+        // newIsland.CaclulateCoinsRequired();
         AddIslandListener(newIsland);
         OnNewIslandLoaded(newIsland);
 
@@ -126,6 +127,7 @@ public class GameManager : MonoBehaviour
         await UnloadScene(oldIslandScene);
 
         Island newIsland = GetIslandObject();
+        // newIsland.CaclulateCoinsRequired();
         AddIslandListener(newIsland);
         OnNewIslandLoaded(newIsland);
     
